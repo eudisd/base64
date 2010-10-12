@@ -1,0 +1,1 @@
+A simple base64 encoder/decoder implementation.  Uses shifts instead of divisions for fast processing.  
