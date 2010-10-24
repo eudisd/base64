@@ -91,6 +91,7 @@ def base64_encode(string, string2):
 
 
 def base64_decode(string, string2):
+    
     global tmp2
     tmp2 = ''
     I = open(string, 'rb')
@@ -100,12 +101,15 @@ def base64_decode(string, string2):
 
     b_len = len(binary);
 
+    #print get_pos('i')
+
     x = 0
     while (x < b_len):
         
         x = x + 1
 
     o.write(tmp2)
+    
     o.close();
     I.close()
     return
@@ -115,10 +119,25 @@ def main(argv):
         try:
             opts, args = getopt.getopt(argv, "ed", ["--encode", "--decode"])
             if argv[0] == '-e':
-                base64_encode(argv[1], argv[2])
+                if len(argv) < 2:
+                    usage();
+                elif len(argv) == 2:
+                    base64_encode(argv[1], "a.out")
+                elif len(argv) == 3:
+                    base64_encode(argv[1], argv[2])
+                else:
+                    print "Wrong Input Format!  Try Again.";
+                    
             elif argv[0] == '-d':
-                base64_encode(argv[1], argv[2])
-        except   getopt.GetoptError:
+                if len(argv) < 2:
+                    usage();
+                elif len(argv) == 2:
+                    base64_decode(argv[1], "a.out")
+                elif len(argv) == 3:
+                    base64_decode(argv[1], argv[2])
+                else:
+                    print "Wrong Input Format!  Try Again.";
+        except getopt.GetoptError:
             usage()
             sys.exit(2)
     else:
