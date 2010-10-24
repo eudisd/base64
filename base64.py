@@ -11,6 +11,11 @@ VERSION = '0.0.1'
 tmp2 = ''
 table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 
+class tuple_4_pack:
+    rem = []
+    value = 0
+        
+    
 def base64_encode(string, string2):
     """ Basic strategy: Get 3 bytes, and carry out binary
         shifting operations (instead of divisions), as it is much faster.
@@ -101,7 +106,11 @@ def base64_decode(string, string2):
 
     b_len = len(binary);
 
-    #print get_pos('i')
+    
+    
+    pack      = to_hex_from_text('VGVz')
+    remainder = pack.rem;
+    data = int(pack.value, 16);
 
     x = 0
     while (x < b_len):
@@ -182,14 +191,17 @@ def get_pos(c):
 
 def to_hex_from_text(tuple_4):
     t = ''
+    x = tuple_4_pack();
+    
     for i in tuple_4:
-        n = get_pos(i);
+        n = get_pos(i)
+        x.rem.append(n)
         if n < 10 and n > -1:
             t = t + '0' + str(n)
         else:
             t = t + str(n);    
-        
-    return t
+    x.value = t;
+    return x
 
 if __name__ == '__main__':
     main(sys.argv[1:])
